@@ -21,14 +21,14 @@ module.exports = function(grunt) {
 					// livereload awesomeness
 					middleware: function(connect, options){
 						return [
-						lrSnippet, 
-						folderMount(connect, './'), 
+						lrSnippet,
+						folderMount(connect, './'),
 						folderDir(connect, './')];
 					}
 				}
 			}
 		},
-		
+
 		coffee: {
 			options: {
 				bare: true
@@ -61,7 +61,7 @@ module.exports = function(grunt) {
 		},
 
 		regarde: {
-			coffee: { 
+			coffee: {
 				files: [
 					'./*.coffee',
 					'./**/*.coffee',
@@ -111,5 +111,6 @@ module.exports = function(grunt) {
 
 	//TODO: put testacular back
 	grunt.registerTask('run', [ 'coffee', 'connect', 'livereload-start', 'regarde']);
+  grunt.registerTask('build', ['coffee']);
 	grunt.registerTask('default', ['run']);
 };
