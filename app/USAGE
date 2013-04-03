@@ -2,4 +2,4 @@ Description:
   Creates a new cityjs webapp
 
 Example:
-  yo cityjs [name]
+  yo cityjs [name] [--silent]
