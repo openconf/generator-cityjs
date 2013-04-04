@@ -8,6 +8,7 @@ module.exports = PackageGenerator;
 function PackageGenerator() {
   yeoman.generators.Base.apply(this, arguments);
   this.argument('packageType', { type: String, required: true });
+  this.option('silent', { type: Boolean, required: false });
 }
 
 util.inherits(PackageGenerator, yeoman.generators.Base);
@@ -16,28 +17,33 @@ PackageGenerator.prototype.main = function main(cb) {
   var self = this;
   var cb = this.async();
 
+  if(fs.existsSync('packages/' + self.packageType)) {
+    if(!this.options.silent){
+      console.log('Package \''.green + self.packageType.red + '\' already installed'.green);
+    }
+    return cb();
+  }
+
   this.remote('openconf', 'packages', function (err, remote) {
     if (err) {
       return cb(err);
     }
     var cachedPackagePath = path.join(remote.cachePath, self.packageType);
-    fs.stat(cachedPackagePath, function (err) {
-      if (!err) {
-        self.packageExists = true;
-        remote.directory(self.packageType, 'packages/' + self.packageType);
-        return cb();
-      }
-      var errorMessage = self.packageType + ' package not found.';
-      console.log(errorMessage.red.bold);
-      console.log('Available packages listed at https://github.com/openconf/packages');
-      console.log('Or try to clean cache by deleting: ' + remote.cachePath.blue);
-      cb();
-    });
+    if(fs.existsSync(cachedPackagePath)){
+      remote.directory(self.packageType, 'packages/' + self.packageType);
+      self.installComplete = true;
+      return cb();
+    }
+    var errorMessage = self.packageType + ' package not found.';
+    console.log(errorMessage.red.bold);
+    console.log('Available packages listed at https://github.com/openconf/packages');
+    console.log('Or try to clean cache by deleting: ' + remote.cachePath.blue);
+    cb();
   });
 };
 
 PackageGenerator.prototype.package = function package() {
-  if(!this.packageExists){
+  if(!this.installComplete){
     return;
   }
   var configFile = 'package.json';

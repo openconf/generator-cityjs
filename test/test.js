@@ -54,18 +54,4 @@ describe('CityJS generator', function() {
       done();
     });
   });
-
-  it ('should create directory layout', function (done) {
-    cityjsGeneraor.run({}, function() {
-      helpers.assertFiles([
-        'app',
-        'data',
-        'docs',
-        'events',
-        'packages',
-        'shared'
-      ]);
-      done();
-    });
-  });
 });
