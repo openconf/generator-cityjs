@@ -50,7 +50,7 @@ AppGenerator.prototype.app = function app() {
   this.copy('common/crossdomain.xml', 'app/crossdomain.xml');
 };
 
-AppGenerator.prototype.boilerplate = function _bootstrapCompass(cb) {
+AppGenerator.prototype.boilerplate = function boilerplate(cb) {
   var cb = this.async();
 
   this.remote('openconf', 'cityjs', function (err, remote) {

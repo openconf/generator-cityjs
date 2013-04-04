@@ -1,0 +1,5 @@
+Description:
+  Enables a cityjs package
+
+Example:
+  yo cityjs:package <package type>
