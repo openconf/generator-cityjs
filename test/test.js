@@ -59,7 +59,6 @@ describe('CityJS generator', function() {
     cityjsGeneraor.run({}, function() {
       helpers.assertFiles([
         'app',
-        'assets',
         'data',
         'docs',
         'events',
