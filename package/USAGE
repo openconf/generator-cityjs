@@ -1,5 +1,6 @@
 Description:
-  Enables a cityjs package
+  Enables a cityjs package.
+  Available packages listed at https://github.com/openconf/packages
 
 Example:
   yo cityjs:package <package type>

@@ -18,6 +18,9 @@
     "testacular": ">= 0.5.8",
 		"grunt-testacular": "~0.3.0"
   },
+  "cityjsPackages": [
+    "shedule"
+  ],
   "engines": {
     "node": ">=0.8.0"
   }
